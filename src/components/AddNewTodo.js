@@ -28,7 +28,8 @@ function AddNewTodo(props) {
         if (!onSubmit) return;
         if (!value) return;
         const formValue = {
-            title: value.trim()
+            title: value.trim(),
+            isComplete: false
         }
 
         onSubmit(formValue);

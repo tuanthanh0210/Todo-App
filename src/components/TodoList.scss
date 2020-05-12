@@ -76,8 +76,17 @@
                     background-color: transparent;
                     border: 2px solid white;
                     color: white;
-                    text-decoration: line-through;
                     opacity: 0.6;
+                    li{
+                        text-decoration: line-through;
+                        
+                    }
+                }
+                div:hover {
+                    i {
+                        opacity: 1;
+                        color: red;
+                    }
                 }
             }
         }
