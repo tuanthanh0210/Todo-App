@@ -1,0 +1,86 @@
+.Home {
+    width: 375px;
+    height: 812px;
+    background-color: #69bbc6;
+    // margin: auto;
+    position: relative;
+    
+    .title {
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+        margin-top: 40px;
+        letter-spacing: 3px;
+        
+    }
+    .main {
+        padding: 15px 15px;
+        max-height: 624px;
+        overflow: scroll;
+
+        .home {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            i {
+                font-size: 50px;
+            }
+            p {
+                margin-bottom: 20px;
+                font-size: 22px;
+                font-style: italic;
+            }
+        }
+        .SignIn {
+            margin-top: 30px;
+            width: 100%;
+            // border: 1px solid white;
+            background-color: #69bbc6;
+            // background-color: rgb(0, 0, 0);
+            // background-color: rgba(0, 0, 0, 0.4);
+        }
+        .SignUp {
+            width: 100%;
+            // border: 1px solid white;
+        }
+    }
+    .main::-webkit-scrollbar {
+        display: none;
+    }
+    .button-footer {
+        width: 100%;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            padding: 15px 30px;
+            border: none;
+            margin: 0 15px;
+            color: #106975;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:focus {
+            outline: none;
+        }
+        button:hover {
+            background-color: #106975;
+            color: white;
+            transition: all 0.5s;
+        }
+        button:active {
+            transform: translateY(5px);
+        }
+        i {
+            color: red;
+        }
+    }
+}

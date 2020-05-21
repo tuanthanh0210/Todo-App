@@ -40,6 +40,7 @@
                 color: white;
                 font-weight: bold;
                 letter-spacing: 2px;
+                font-size: 18px;
             }
             ul {
                 list-style: none;
@@ -60,6 +61,8 @@
                     }
                     i {
                         opacity: 0;
+                        font-size: 18px;
+                        padding: 5px;
                     }
                 }
                 div:hover {

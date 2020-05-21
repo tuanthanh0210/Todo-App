@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './AddNewTodo.scss'
 import PropsTypes from 'prop-types'
 
@@ -11,12 +11,22 @@ AddNewTodo.defaultProps = {
 }
 
 
+
+
 function AddNewTodo(props) {
+    const inputElement = useRef(null)
     const user = {
         name: 'Thành'
     }
     const { isOpen, closeModal, onSubmit } = props;
     const [value, setValue] = useState('')
+
+    
+    useEffect(() => {
+        if(isOpen){
+            inputElement.current.focus();
+        } else return;
+    })
 
     function handleValueChange(e) {
         // console.log(e.target.value)
@@ -43,7 +53,7 @@ function AddNewTodo(props) {
                 <h3>Hi, {user.name}</h3>
                 <h3>Today, what needs to be done ?</h3>
                 <form action="" onSubmit={handleSubmit} className="form">
-                    <input type="text" value={value} onChange={handleValueChange} placeholder="todo..." />
+                    <input type="text" value={value} onChange={handleValueChange} placeholder="todo..." ref={inputElement} />
                     <div className="button">
                         <button className="btn btn-accept" type="submit" onClick={handleSubmit}>Accept</button>
                         <button className="btn btn-close" onClick={closeModal}>Close</button>

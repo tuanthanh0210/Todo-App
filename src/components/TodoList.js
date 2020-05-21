@@ -3,14 +3,11 @@ import './TodoList.scss'
 import Header from './Header';
 import welcome from '../images/welcome.svg'
 import AddNewTodo from './AddNewTodo';
-import shortid from 'shortid';
 import classNames from 'classnames'
 import axios from 'axios'
 
 function TodoList(props) {
-    // const { todoList } = props;
     const [todoList, setTodoList] = useState([])
-    // const [todoListComplete, setTodoListComplete] = useState([])
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal)
     const localHost = 'http://localhost:8081/api/todos';
@@ -20,39 +17,28 @@ function TodoList(props) {
     useEffect(() => {
         async function fetchData() {
             const todoListAPI = await axios.get(url);
+            // console.log(todoList)
             setTodoList(todoListAPI.data)
         };
         fetchData()
-    }, [])
+    },[])
 
     function closeModal() {
         setModal(false)
     }
 
     async function addNewTodo(formValue) {
-        let addNew = await axios.post(url, formValue);
-        setTodoList(addNew.data)
-        // const newTodo = {
-        //     id: shortid.generate(),
-        //     ...formValue
-        // }
-        // const newTodoList = [...todoList]
-        // newTodoList.push(newTodo);
-        // setTodoList(newTodoList)
+        let newTodoList = await axios.post(url, formValue);
+        setTodoList(newTodoList.data)
     }
 
     async function onComplete(todo) {
-        // let todoNonComplete = todoList.filter(item => item.id !== todo.id)
-        // let todoComplete = todoList.filter(item => item.id === todo.id)
-        // setTodoList(todoNonComplete)
-        // setTodoListComplete(todoListComplete.concat(todoComplete))
-        let updateTodo = await axios.post(`${url}/${todo.id}`)
+        let updateTodo = await axios.post(`${url}/${todo.id}`, todo)
         setTodoList(updateTodo.data)
+        // console.log(todoList)
     }
 
     async function onRemoveTodoItem(todo) {
-        // let todoNonComplete = todoList.filter(item => item.id !== todo.id);
-        // setTodoList(todoNonComplete)
         let deleteTodo = await axios.get(`${url}/${todo.id}/delete`)
         setTodoList(deleteTodo.data)
     }
@@ -89,12 +75,13 @@ function TodoList(props) {
                                             <li onClick={() => onComplete(todo)}>
                                                 {index + 1}. {todo.title}
                                             </li>
-                                            <i className="fas fa-trash-alt" onClick={() => onRemoveTodoItem(todo)} ></i>
+                                            <span onClick={() => onRemoveTodoItem(todo)} >
+                                                <i className="fas fa-trash-alt" ></i>
+                                            </span>
                                         </div>
                                     ))
                                 }
                             </ul>
-
                         </div>
 
                     }
@@ -107,7 +94,9 @@ function TodoList(props) {
                                     todoList.filter(todo => todo.isComplete === true).map((todo, index) => (
                                         <div key={todo.id}>
                                             <li >{index + 1}. {todo.title}</li>
-                                            <i className="fas fa-trash-alt" onClick={() => onRemoveTodoItem(todo)} ></i>
+                                            <span onClick={() => onRemoveTodoItem(todo)} >
+                                                <i className="fas fa-trash-alt" ></i>
+                                            </span>
                                         </div>
                                     ))
                                 }
